@@ -2,7 +2,7 @@
   <div class="create-container">
     <input v-model="titleOfNewToDo" type="text">
     <button @click="create">
-      Add
+      Added
     </button>
   </div>
 </template>
