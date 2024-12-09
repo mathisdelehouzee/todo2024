@@ -35,7 +35,9 @@ jobs:
 
   build-backend:
     runs-on: ubuntu-latest
-
+    defaults:
+     run:
+      working-directory: ./backend
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 11
@@ -50,7 +52,7 @@ jobs:
       - name: Make executeable
         run: chmod +x ./gradlew
       - name: Build with Gradle
-        working-directory: backend/
+        working-directory: ./backend
         run: ./gradlew build
 
   test-backend:
@@ -71,7 +73,7 @@ jobs:
       - name: Make executeable
         run: chmod +x ./gradlew
       - name: Test with Gradle
-        working-directory: backend/
+        working-directory: ./backend
         run: ./gradlew test
 
   deploy-backend:
@@ -82,4 +84,5 @@ jobs:
       - name: Deploying Backend...
         run: | 
          curl --request GET '${{ secrets.BACKEND_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
+
 
